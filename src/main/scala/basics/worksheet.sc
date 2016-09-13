@@ -67,7 +67,41 @@ class Calculator2(brand: String) {
 val calc2 = new Calculator2("HP")
 calc2.color
 
-class ScientificCalculator(brand: String) extends Calculator(brand) {
+class ScientificCalculator(brand: String) extends Calculator2(brand) {
   def log(m: Double, base: Double) = math.log(m) / math.log(base)
 }
 
+class EvenMoreScientificCalculator(brand: String) extends ScientificCalculator(brand) {
+  def log(m: Int): Double = log(m, math.exp(1))
+}
+
+abstract class Shape {
+  def getArea(): Int
+}
+
+class Circle(r: Int) extends Shape {
+  def getArea(): Int = { r * r * 3 }
+}
+
+val c = new Circle(5)
+c.getArea
+
+trait Car {
+  val brand: String
+}
+
+trait Shiny {
+  val shineRefraction: Int
+}
+
+class BMW extends Car with Shiny {
+  val brand: String = "BMW"
+  val shineRefraction: Int = 12
+}
+
+trait Cache[K, V] {
+  def get(key: K): V
+  def put(key: K, value: V)
+  def delete(key: K)
+  def remove[K](key: K)
+}
